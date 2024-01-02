@@ -1,0 +1,6 @@
+This document aims to outline some potential bugs which will most likely arise from rudimentary and placeholder code.
+
+POSSIBLE BUG: EXTRA DAMAGE BEING DEALT
+SOURCE: PlayerCombat.cs
+EXPLANATION: To avoid attacks causing damage to a target every frame they touch, the list exemptColliders records the colliders which have already been hit by a particular attack, to ignore them for the rest of the attack. However, because this only records colliders, not greater game objects, a target which has multiple active colliders will take damage seperately for each additional collider hit by the attack, causing the attack to seem to hit twice.
+SOLUTION: Change exemptColliders to exemptObjects, and appropriately expand the scope of the exemption to the whole object rather than just a single collider.
